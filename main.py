@@ -44,4 +44,4 @@ async def on_ready():
 	await channel.send(cogsList)
 
 token = os.environ.get('token')
-client.run(token, bot=True, reconnect=True)
+client.run(token)
