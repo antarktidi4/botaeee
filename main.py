@@ -1,3 +1,4 @@
+from discord import Activity, ActivityType
 from discord.ext import commands
 import discord, os
 
@@ -44,6 +45,6 @@ async def on_ready():
 	guild = client.get_guild(778169282655551498)
 	channel = discord.utils.get(guild.channels, name='test')
 	await channel.send(cogsList)
-
+	await client.change_presence(status=discord.Status.idle, activity=Activity(name='за всеми', type=ActivityType.watching))
 token = os.environ.get('token')
 client.run(token)
