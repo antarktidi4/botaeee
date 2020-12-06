@@ -38,16 +38,3 @@ class textCommands(commands.Cog):
 		
 def setup(client):
 	client.add_cog(textCommands(client))
-
-
-"""
-
-@client.command('u')
-async def u(ctx, member: discord.Member):
-	msg = await ctx.message.channel.fetch_message(ctx.message.id)
-	await msg.delete()
-	await ctx.send(f'{ctx.message.author.mention} унизил {member.mention}')
-
-
-
-"""
