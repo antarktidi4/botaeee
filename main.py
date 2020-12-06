@@ -1,7 +1,7 @@
 import discord, os
 
 intents = discord.Intents.all()
-client = discord.Bot(command_prefix = '$', intents = intents)
+client = discord.Client(command_prefix = '$', intents = intents)
 client.remove_command('help')
 
 
