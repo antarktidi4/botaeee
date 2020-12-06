@@ -39,7 +39,6 @@ class UserLvl(commands.Cog):
 
 			await updateLvl(message.author, message.channel)
 
-			await self.client.process_commands(message)
 
 
 
