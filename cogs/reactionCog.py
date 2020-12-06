@@ -30,9 +30,7 @@ class PolitReaction(commands.Cog):
 			if payload.emoji.name == 'left':
 				await member.remove_roles(discord.utils.get(guild.roles, name="левые"))
 			elif payload.emoji.name == 'right':
-				role = discord.utils.get(member.guild.roles, name="правые")
-				if role in member.roles:
-					await member.remove_roles(discord.utils.get(guild.roles, name="правые"))
+				await member.remove_roles(discord.utils.get(guild.roles, name="правые"))
 
 
 
