@@ -31,8 +31,11 @@ async def reload(ctx, extension):
 cogsList = 'bot is ready!\n'
 for files in os.listdir('./cogs'):
 	if files.endswith('.py'):
-		client.load_extension(f'cogs.{files[:-3]}')
-		cogsList += f'  - *{files[:-3]}* has loaded :white_check_mark:\n'
+		try:
+			client.load_extension(f'cogs.{files[:-3]}')
+			cogsList += f'  - *{files[:-3]}* has loaded :white_check_mark:\n'
+		except:
+			cogsList += f'  - *{files[:-3]}* has no loaded :negative_squared_cross_mark:\n'
 
 @client.event
 async def on_ready():
