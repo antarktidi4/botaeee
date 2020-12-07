@@ -18,7 +18,8 @@ class UserLvl(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_member_join(self, member):
-		await updateData(member)
+		if message.guild.id == 778169282655551498:
+			await updateData(member)
 
 
 	@commands.Cog.listener()
