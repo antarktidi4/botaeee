@@ -78,7 +78,7 @@ def UI(id):
 
 def addExp(startExp, nextLvlExp, id):
 	cursor.execute(f"UPDATE users SET userExp = {startExp + nextLvlExp} WHERE userID = '{id}'")
-	db.commit
+	db.commit()
 
 
 def setup(client):
