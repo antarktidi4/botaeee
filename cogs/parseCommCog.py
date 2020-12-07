@@ -2,6 +2,8 @@ from discord.ext import commands
 import discord, requests
 from bs4 import BeautifulSoup as BS
 from random import randint
+from pybooru import Danbooru
+
 
 class parseCommands(commands.Cog):
 	def __init__(self, client):
@@ -22,13 +24,21 @@ class parseCommands(commands.Cog):
 		embed.set_image(url = r['url'])
 		await ctx.send(embed = embed)
 
-	@commands.command('hentai')
-	async def meme(self, ctx):
+	@commands.command('rhentai')
+	async def rhentai(self, ctx):
 		r = requests.get('https://meme-api.herokuapp.com/gimme/hentai').json()
 		embed = discord.Embed(title="Random hentai!", description=f"link: {r['postLink']}\ntitle: {r['title']}", color=0xff00f6)
 		embed.set_image(url = r['url'])
 		await ctx.send(embed = embed)
 
+	@commands.command('dhentai')
+	async def dhentai(self, ctx, tags):
+		dClient = Danbooru('danbooru')
+		s = dClient.post_list(limit=1, tags=tags, random = True)
+		embed = discord.Embed(title="Random hentai!", description=f"link: [source]({s[0]['source']})", color=0xff00f6)
+		embed.set_image(url = s[0]['file_url'])
+		embed.set_footer(text = s[0]['tag_string'])
+		await ctx.send(embed = embed)
 
 
 def setup(client):
