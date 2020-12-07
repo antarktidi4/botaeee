@@ -12,6 +12,17 @@ class textCommands(commands.Cog):
 	async def ping(self, ctx):
 		await ctx.send(f'Pong! {round(self.client.latency * 1000)}ms')
 
+	@commands.command()
+	async def help(self, ctx):
+
+		embed=discord.Embed(title="Help command")
+		embed.add_field(name="text command", value="gaytest - тест на гея\ndickometr - размер твоего гиганта\noppr @nick - унижение чела", inline=True)
+		embed.add_field(name="parse command", value="anec - анекдот\nmeme - рандомный мем\nrhentai - рандом пик хентая\ndhentai {tag} - пик хентая по тегу", inline=True)
+		embed.set_footer(text="help for")
+		await ctx.send(embed=embed)
+
+
+
 	@commands.command(name = 'gaytest')
 	async def gaytest(self, ctx):
 		await ctx.send(f'{ctx.message.author.mention} гей на {randint(0,100)}%')
