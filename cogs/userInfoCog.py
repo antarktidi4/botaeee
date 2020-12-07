@@ -27,8 +27,8 @@ class textCommands(commands.Cog):
 		embed.set_author(name = ctx.message.author, icon_url = ctx.message.author.avatar_url)
 		await ctx.send(embed=embed)
 
-	@client.command('addlvl')
-	async def addlvl(ctx):
+	@commands.command('addlvl')
+	async def addlvl(self, ctx):
 		role = discord.utils.get(ctx.author.guild.roles, name="Власть")
 		if role in ctx.message.author.roles:
 			userInfo = UI(ctx.message.author.id)
