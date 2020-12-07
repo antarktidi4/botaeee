@@ -19,7 +19,7 @@ class parseCommands(commands.Cog):
 	async def meme(self, ctx):
 		r = requests.get('https://meme-api.herokuapp.com/gimme').json()
 		embed = discord.Embed(title="Random Meme!", description=f"link: {r['postLink']}\ntitle: {r['title']}", color=0xff00f6)
-		embed.set_image(url = r['preview'][len(r['preview'])-1])
+		embed.set_image(url = r['url'])
 		await ctx.send(embed = embed)
 
 
