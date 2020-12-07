@@ -1,5 +1,7 @@
 from discord.ext import commands
-import psycopg2, os
+import discord, psycopg2, os
+
+
 
 
 
@@ -7,6 +9,7 @@ dbname = os.environ.get('dbname')
 user = os.environ.get('user')
 password = os.environ.get('password')
 host = os.environ.get('host')
+
 
 
 db = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)
@@ -72,6 +75,11 @@ def UI(id):
 	for userInfo in cursor.fetchall():
 		userInfo = userInfo
 	return userInfo
+
+def addExp(startExp, nextLvlExp, id):
+	cursor.execute(f"UPDATE users SET userExp = {startExp + nextLvlExp} WHERE userID = '{id}'")
+	db.commit
+
 
 def setup(client):
 	client.add_cog(UserLvl(client))

@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord
-from cogs.dbCog import UI
+from cogs.dbCog import UI, addExp
 
 
 class textCommands(commands.Cog):
@@ -26,6 +26,17 @@ class textCommands(commands.Cog):
 		embed = discord.Embed(title = 'Your card!', description=f"exp: {exp} (to next lvl: {nextLvlExp})\nlvl: {userLvl}\npolitical coordinate: {userPolit}", color=0xff00f6)
 		embed.set_author(name = ctx.message.author, icon_url = ctx.message.author.avatar_url)
 		await ctx.send(embed=embed)
+
+	@client.command('addlvl')
+	async def addlvl(ctx):
+		role = discord.utils.get(ctx.author.guild.roles, name="Власть")
+		if role in ctx.message.author.roles:
+			userInfo = UI(ctx.message.author.id)
+			lvlExpReq = (int(userInfo[1]**(1/4)) + 1)**4
+			nextLvlExp = (lvlExpReq - userInfo[1]) + 4
+
+
+			addExp(userInfo[1], nextLvlExp ,ctx.message.author.id)
 
 
 		
