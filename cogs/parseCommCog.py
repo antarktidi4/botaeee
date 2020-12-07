@@ -22,6 +22,12 @@ class parseCommands(commands.Cog):
 		embed.set_image(url = r['url'])
 		await ctx.send(embed = embed)
 
+	@commands.command('hentai')
+	async def meme(self, ctx):
+		r = requests.get('https://meme-api.herokuapp.com/gimme/hentai').json()
+		embed = discord.Embed(title="Random hentai!", description=f"link: {r['postLink']}\ntitle: {r['title']}", color=0xff00f6)
+		embed.set_image(url = r['url'])
+		await ctx.send(embed = embed)
 
 
 
