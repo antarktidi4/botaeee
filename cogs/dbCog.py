@@ -2,14 +2,10 @@ from discord.ext import commands
 import discord, psycopg2, os
 
 
-
-
-
 dbname = os.environ.get('dbname')
 user = os.environ.get('user')
 password = os.environ.get('password')
 host = os.environ.get('host')
-
 
 
 db = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)
@@ -20,12 +16,9 @@ class UserLvl(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-
-
 	@commands.Cog.listener()
 	async def on_member_join(self, member):
 		await updateData(member)
-
 
 
 	@commands.Cog.listener()
@@ -41,9 +34,6 @@ class UserLvl(commands.Cog):
 			db.commit()
 
 			await updateLvl(message.author, message.channel)
-
-
-
 
 
 async def updateData(user):
@@ -70,6 +60,8 @@ async def updateLvl(user, channel):
 		cursor.execute(f"UPDATE users SET userLvl = {lvlEnd} WHERE userID = '{user.id}'")
 		db.commit()
 
+		
+		
 def UI(id):
 	cursor.execute(f"SELECT * FROM users WHERE userID = '{id}'")
 	for userInfo in cursor.fetchall():
@@ -80,6 +72,8 @@ def addExp(startExp, nextLvlExp, id):
 	cursor.execute(f"UPDATE users SET userExp = {startExp + nextLvlExp} WHERE userID = '{id}'")
 	db.commit()
 
+
+	
 
 def setup(client):
 	client.add_cog(UserLvl(client))
