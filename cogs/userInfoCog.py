@@ -34,8 +34,6 @@ class textCommands(commands.Cog):
 			userInfo = UI(ctx.message.author.id)
 			lvlExpReq = (int(userInfo[1]**(1/4)) + 1)**4
 			nextLvlExp = (lvlExpReq - userInfo[1]) + 4
-
-
 			addExp(userInfo[1], nextLvlExp ,ctx.message.author.id)
 
 
