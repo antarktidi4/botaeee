@@ -23,7 +23,7 @@ class UserLvl(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
-		if message.author.bot is False:
+		if message.author.bot is False and message.guild.id == 778169282655551498:
 
 			await updateData(message.author)
 
