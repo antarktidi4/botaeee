@@ -17,6 +17,7 @@ class textCommands(commands.Cog):
 		embed=discord.Embed(title="Help command")
 		embed.add_field(name="text command", value="gaytest - тест на гея\ndickometr - размер твоего гиганта\noppr @nick - унижение чела", inline=True)
 		embed.add_field(name="parse command", value="anec - анекдот\nmeme - рандомный мем\nrhentai - рандом пик хентая\ndhentai {tag} - пик хентая по тегу", inline=True)
+		embed.add_field(name="games", value="ttt @nick - крестики нолики", inline=True)
 		await ctx.send(embed=embed)
 
 	@commands.command(name = 'gaytest')
