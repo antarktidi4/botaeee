@@ -15,10 +15,29 @@ class textCommands(commands.Cog):
 	@commands.command()
 	async def help(self, ctx):
 		embed=discord.Embed(title="Help command")
-		embed.add_field(name="text command", value="gaytest - тест на гея\ndickometr - размер твоего гиганта\noppr @nick - унижение чела", inline=True)
+		embed.add_field(name="text command", value="gaytest - тест на гея\ndickometr - размер твоего гиганта\noppr @nick - унижение чела\nct {text} - клоунский текст", inline=True)
 		embed.add_field(name="parse command", value="anec - анекдот\nmeme - рандомный мем\nrhentai - рандом пик хентая\ndhentai {tag} - пик хентая по тегу", inline=True)
 		embed.add_field(name="games", value="ttt @nick - крестики нолики", inline=True)
 		await ctx.send(embed=embed)
+
+	@commands.command(name = 'ct')
+	async def bodyshaming(self, ctx):
+		x = 0
+		final = ""
+		text = ctx.message.content[4:]
+		for Chr in text:
+			x += 1
+			if x % 2 == 0:
+				final += Chr.upper()
+			else:
+				final += Chr.lower()
+		try:
+			msg = await ctx.message.channel.fetch_message(ctx.message.id)
+			await msg.delete()
+		except:
+			pass
+		await ctx.send(final)
+
 
 	@commands.command(name = 'gaytest')
 	async def gaytest(self, ctx):
