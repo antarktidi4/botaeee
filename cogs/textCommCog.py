@@ -21,7 +21,7 @@ class textCommands(commands.Cog):
 		await ctx.send(embed=embed)
 
 	@commands.command(name = 'ct')
-	async def bodyshaming(self, ctx):
+	async def ct(self, ctx):
 		x = 0
 		final = ""
 		text = ctx.message.content[4:]
