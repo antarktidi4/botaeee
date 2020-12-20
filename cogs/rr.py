@@ -30,7 +30,7 @@ class rr(commands.Cog):
 	@commands.command(name = 'roulette')
 	async def roulette(self, ctx):
 		member = ctx.message.content[10:]
-		if member == '':
+		if member != '':
 			await ctx.send(f'{ctx.message.author.mention} скоро будет сделано')
 		else:
 			mess = await ctx.fetch_message(790285591102619690)
