@@ -23,7 +23,7 @@ class textCommands(commands.Cog):
 
 	@commands.command(name = 'rHelp')
 	async def rHelp(self, ctx):
-		await ctx.send(f'{ctx.message.author.mention} соло: стреляешь 5 раз. Стрельнул и не умер? - выиграл 200xp, а если же умер - -100xp и все заработанные выше:)\nдуо: *скоро будет...*\nУдачи!')
+		await ctx.send(f'{ctx.message.author.mention} соло: стреляешь 5 раз. Стрельнул и не умер? - выиграл 200xp, а если же умер - -100xp и все заработанные выше(в любой момент можно прописать $rEx и выйти из рулетки):)\nдуо: *скоро будет...*\nУдачи!')
 
 	@commands.command(name = 'ct')
 	async def ct(self, ctx):
