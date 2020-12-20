@@ -25,6 +25,19 @@ class rr(commands.Cog):
 		duoMess = await ctx.fetch_message(790285669817778176)
 		await ctx.send(f'solo: {soloMess.content}\nduo: {duoMess.content}')
 
+	@commands.command(name = 'rEx')
+	async def rEx(self, ctx):
+		mess = await ctx.fetch_message(790285591102619690)
+		data = json.loads(str(mess.content))
+		if data['user'] == ctx.message.author.mention:
+			exp = 200*(6-data['bullets'])
+			uID, uExp, Ulvl = UI(ctx.message.author.id)
+			addExp(uExp, exp, uID)
+			data['bullets'] = 0
+			data['user'] = 'sosat'
+			d = json.dumps(data)
+			await mess.edit(content=d)
+			await ctx.send(f'{ctx.message.author.mention} Зассал и выкинул револьвер.\n  Полученно exp: {exp}')
 
 
 	@commands.command(name = 'roulette')
