@@ -23,8 +23,13 @@ class textCommands(commands.Cog):
 
 	@commands.command(name = 'rHelp')
 	async def rHelp(self, ctx):
-		await ctx.send(f'{ctx.message.author.mention} соло: стреляешь 5 раз. Стрельнул и не умер? - выиграл 200xp, а если же умер - -100xp и все заработанные выше(в любой момент можно прописать $rEx и выйти из рулетки)\nдуо: *скоро будет...*\nУдачи!')
-
+		embed=discord.Embed(title="roulette Help")
+		embed.add_field(name="solo:", value="стреляешь 5 раз. Стрельнул и не умер? - выиграл 200xp, а если же умер - -100xp", inline=True)
+		embed.add_field(name="duo", value="*скоро будет...*", inline=True)
+		embed.add_field(name="(в любой момент можно прописать $rEx и выйти из рулетки)", value="", inline=False)
+		embed.set_footer(text="Удачи!")
+		await ctx.send(embed=embed)
+		
 	@commands.command(name = 'ct')
 	async def ct(self, ctx):
 		x = 0
