@@ -14,7 +14,7 @@ class textCommands(commands.Cog):
 		if role in ctx.message.author.roles:
 			userPolit = 'правый'
 		else:
-			userPolit = 'правый'
+			userPolit = 'левый'
 
 		userInfo = UI(ctx.message.author.id)
 		exp = userInfo[1]
