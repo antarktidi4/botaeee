@@ -24,7 +24,7 @@ class textCommands(commands.Cog):
 	@commands.command(name = 'rHelp')
 	async def rHelp(self, ctx):
 		embed=discord.Embed(title="roulette Help")
-		embed.add_field(name="solo:", value="roulette - стреляешь 5 раз. Стрельнул и не умер? - выиграл 200xp, а если же умер - -100xp", inline=True)
+		embed.add_field(name="solo:", value="roulette - стреляешь 5 раз. Стрельнул и не умер? - выиграл 200xp, а если же умер - -100xp и все накопленные выше", inline=True)
 		embed.add_field(name="duo", value="*скоро будет...*", inline=True)
 		embed.add_field(name="**важно!**", value="в любой момент можно прописать $rEx и выйти из рулетки", inline=False)
 		embed.set_footer(text="Удачи!")
