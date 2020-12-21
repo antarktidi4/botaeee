@@ -76,7 +76,7 @@ class textCommands(commands.Cog):
 	@commands.command(name = 'up')
 	async def up(self, ctx, member: discord.Member = None):
 		user = ctx.message.author.mention if member is None else member.mention
-		p = ['попущенец', 'педофилыч', 'хуйс', 'король', 'пиздоблядка', 'хохол', 'вор', 'чиркаш', 'депутат', 'шнырь', 'водолаз', 'колпак', 'пидорас', 'вахчун', 'шпак', 'Гудабзай', '']
+		p = ['попущенец', 'педофилыч', 'хуйс', 'король', 'пиздоблядка', 'хохол', 'вор', 'чиркаш', 'депутат', 'шнырь', 'водолаз', 'колпак', 'пидорас', 'вахчун', 'шпак', 'Гудабзай', 'симп', 'инцел']
 		await ctx.send(f'{user} получает заслуженное звание "{choice(p)}"')
 
 
