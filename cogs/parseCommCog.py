@@ -1,7 +1,5 @@
 from discord.ext import commands
-import discord, requests
-from bs4 import BeautifulSoup as BS
-from random import randint
+import discord, requests, json
 from pybooru import Danbooru
 
 
@@ -12,10 +10,8 @@ class parseCommands(commands.Cog):
 
 	@commands.command('anec')
 	async def anec(self, ctx):
-		r = requests.get('https://4tob.ru/anekdots/tag/short/page' + str(randint(1, 27)))
-		html = BS(r.content, 'html.parser')
-		text = html.select('.text')
-		await ctx.send(text[randint(0, 29)].text)
+		rawcontent = requests.get('http://rzhunemogu.ru/RandJSON.aspx?CType=1').text
+		await ctx.send(json.loads(rawcontent, strict=False)['content'])
 
 	@commands.command('meme')
 	async def meme(self, ctx):
