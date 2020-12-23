@@ -31,7 +31,7 @@ class rr(commands.Cog):
 		data = json.loads(str(mess.content))
 		if data['user'] == ctx.message.author.mention:
 			exp = 200*(6-data['bullets'])
-			uID, uExp, Ulvl = UI(ctx.message.author.id)
+			uID, uExp, Ulvl, uAlias = UI(ctx.message.author.id)
 			addExp(uExp, exp, uID)
 			data['bullets'] = 0
 			data['user'] = 'sosat'
@@ -57,7 +57,7 @@ class rr(commands.Cog):
 
 			elif data['user'] == ctx.message.author.mention:
 				state = randint(1, data['bullets'])
-				uID, uExp, Ulvl = UI(ctx.message.author.id)
+				uID, uExp, Ulvl, uAlias = UI(ctx.message.author.id)
 
 				if state == 1:
 					exp = 100+200*(6-data['bullets'])
