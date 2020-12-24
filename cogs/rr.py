@@ -46,7 +46,7 @@ class rr(commands.Cog):
 		if member != '':
 			await ctx.send(f'{ctx.message.author.mention} скоро будет сделано')
 		else:
-			mess = await ctx.fetch_message(790285591102619690)
+			mess = await ctx.fetch_message(778308167650115594, 790285591102619690)
 			data = json.loads(str(mess.content))
 			if data['bullets'] == 0:
 				await ctx.send(f'{ctx.message.author.mention} готов рискнуть жизнью в русской рулетке.\n  Заряжает револьвер.')
