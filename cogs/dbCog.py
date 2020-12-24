@@ -51,10 +51,14 @@ async def updateData(user):
 	cursor.execute(f"SELECT * FROM users")
 	for dbUsers in cursor.fetchall():
 		u.append(dbUsers[0])
-	if str(user.id) not in u:
-		cursor.execute(f"INSERT INTO users VALUES ('{user.id}', {0}, {1}, NULL)")
-		db.commit()
-
+	try:
+		if str(user.id) not in u:
+			cursor.execute(f"INSERT INTO users VALUES ('{user.id}', {0}, {1}, NULL)")
+			db.commit()
+	except:
+		if str(user) not in u:
+			cursor.execute(f"INSERT INTO users VALUES ('{user}', {0}, {1}, NULL)")
+			db.commit()
 
 
 async def updateLvl(user, channel):
@@ -83,10 +87,12 @@ def addExp(startExp, nextLvlExp, id):
 	db.commit()
 
 def updateAlias(id, alias):
+	updateData(id)
 	cursor.execute(f"UPDATE users SET useralias = '{alias}' WHERE userID = '{id}'")
 	db.commit()
 
 def removeAlias(id):
+	updateData(id)
 	cursor.execute(f"UPDATE users SET useralias = NULL WHERE userID = '{id}'")
 	db.commit()
 
