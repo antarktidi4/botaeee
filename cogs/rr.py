@@ -27,7 +27,8 @@ class rr(commands.Cog):
 
 	@commands.command(name = 'rEx')
 	async def rEx(self, ctx):
-		mess = await ctx.fetch_message(790285591102619690)
+		channel = await self.client.fetch_channel(778308167650115594)
+		mess = await channel.fetch_message(790285591102619690)
 		data = json.loads(str(mess.content))
 		if data['user'] == ctx.message.author.mention:
 			exp = 200*(6-data['bullets'])
