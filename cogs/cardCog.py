@@ -21,12 +21,12 @@ class card(commands.Cog):
 			await ctx.send(embed=embed)
 			return
 
-		role = discord.utils.get(ctx.message.author.guild.roles, name="правые")
+		role = discord.utils.get(ctx.message.author.guild.roles, name="левые")
 		
 		if role in user.roles:
-			userPolit = 'правый'
-		else:
 			userPolit = 'левый'
+		else:
+			userPolit = 'правый'
 
 		userInfo = UI(user.id)
 		alias = userInfo[3]
