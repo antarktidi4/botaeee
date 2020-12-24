@@ -77,6 +77,7 @@ async def updateLvl(user, channel):
 		
 		
 def UI(id):
+	UserLvl.updateData(id)
 	cursor.execute(f"SELECT * FROM users WHERE userID = '{id}'")
 	for userInfo in cursor.fetchall():
 		userInfo = userInfo
@@ -87,12 +88,12 @@ def addExp(startExp, nextLvlExp, id):
 	db.commit()
 
 def updateAlias(id, alias):
-	updateData(id)
+	UserLvl.updateData(id)
 	cursor.execute(f"UPDATE users SET useralias = '{alias}' WHERE userID = '{id}'")
 	db.commit()
 
 def removeAlias(id):
-	updateData(id)
+	UserLvl.updateData(id)
 	cursor.execute(f"UPDATE users SET useralias = NULL WHERE userID = '{id}'")
 	db.commit()
 
