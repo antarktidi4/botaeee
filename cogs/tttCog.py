@@ -48,10 +48,12 @@ class TicTacToe(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_raw_message_edit(self, payload: discord.RawReactionActionEvent):
-		if payload.message_id == reactMess.id:
-			global state
-			state = True
-
+		try:
+			if payload.message_id == reactMess.id:
+				global state
+				state = True
+		except:
+			pass
 
 
 

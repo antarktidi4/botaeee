@@ -1,6 +1,6 @@
 from discord.ext import commands
 import json, discord
-from cogs.dbCog import addExp, UI
+from cogs.dbCog import addExp, UI, removeLvl
 from random import randint
 
 
@@ -42,9 +42,8 @@ class rr(commands.Cog):
 
 
 	@commands.command(name = 'roulette')
-	async def roulette(self, ctx):
-		member = ctx.message.content[10:]
-		if member != '':
+	async def roulette(self, ctx, member: discord.Member = None):
+		if member is not None:
 			await ctx.send(f'{ctx.message.author.mention} скоро будет сделано')
 		else:
 			channel = await self.client.fetch_channel(778308167650115594)
@@ -64,9 +63,13 @@ class rr(commands.Cog):
 				if state == 1:
 					exp = 100+200*(6-data['bullets'])
 					addExp(uExp, -exp, uID)
+					lvl = int(uExp ** (1/4))
 					data['bullets'] = 0
 					data['user'] = 'sosat'
 					await ctx.send(f'{ctx.message.author.mention} Сделал выстрел и умер.\n  Потеряно exp: {exp}')
+					if Ulvl < lvl:
+						removeLvl(uID, lvl)
+						await ctx.send(f'{ctx.message.author.mention} reduced level to {lvl}')
 
 				elif data['bullets'] > 1:
 					data['bullets'] -= 1

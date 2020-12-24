@@ -97,6 +97,13 @@ def removeAlias(id):
 	cursor.execute(f"UPDATE users SET useralias = NULL WHERE userID = '{id}'")
 	db.commit()
 
+def removeLvl(id, lvl):
+	updateData(id)
+	cursor.execute(f"UPDATE users SET userlvl = {lvl} WHERE userID = '{id}'")
+	db.commit()
+
+
+
 
 def setup(client):
 	client.add_cog(UserLvl(client))
