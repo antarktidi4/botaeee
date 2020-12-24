@@ -1,11 +1,11 @@
 from discord.ext import commands
 import discord, psycopg2, os
 
+dbname = 'd9ehvkm8fc5u3e'
+user = 'qjlbkzwsprhfjf'
+password = '947b16268fb6b5bb95dc52be131a328f47ca95908364f0cef8e8a7b4273296f9'
+host = 'ec2-52-21-0-111.compute-1.amazonaws.com'
 
-dbname = os.environ.get('dbname')
-user = os.environ.get('user')
-password = os.environ.get('password')
-host = os.environ.get('host')
 
 
 db = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)
@@ -18,23 +18,32 @@ class UserLvl(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_member_join(self, member):
-		if message.guild.id == 778169282655551498:
-			await updateData(member)
+		try:
+			if member.guild.id == 778169282655551498:
+				guild = self.client.get_guild(member.guild.id)
+				await member.add_roles(discord.utils.get(guild.roles, name="Рабочий класс"))
+				await updateData(member)
+		except AttributeError:
+			pass
 
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
-		if message.author.bot is False and message.guild.id == 778169282655551498:
+		try:
+			if message.author.bot is False and message.guild.id == 778169282655551498:
+				if message.guild.id == 778169282655551498:
+					await updateData(message.author)
 
-			await updateData(message.author)
+					cursor.execute(f"SELECT userExp FROM users WHERE userID = '{message.author.id}'")
+					for userInfo in cursor.fetchall():
+						uExp = userInfo[0]
+					cursor.execute(f"UPDATE users SET userExp = {uExp + 5} WHERE userID = '{message.author.id}'")
+					db.commit()
 
-			cursor.execute(f"SELECT userExp FROM users WHERE userID = '{message.author.id}'")
-			for userInfo in cursor.fetchall():
-				uExp = userInfo[0]
-			cursor.execute(f"UPDATE users SET userExp = {uExp + 5} WHERE userID = '{message.author.id}'")
-			db.commit()
+					await updateLvl(message.author, message.channel)
+		except AttributeError:
+			pass
 
-			await updateLvl(message.author, message.channel)
 
 
 async def updateData(user):
@@ -43,7 +52,7 @@ async def updateData(user):
 	for dbUsers in cursor.fetchall():
 		u.append(dbUsers[0])
 	if str(user.id) not in u:
-		cursor.execute(f"INSERT INTO users VALUES ('{user.id}', {0}, {1})")
+		cursor.execute(f"INSERT INTO users VALUES ('{user.id}', {0}, {1}, NULL)")
 		db.commit()
 
 
@@ -73,8 +82,14 @@ def addExp(startExp, nextLvlExp, id):
 	cursor.execute(f"UPDATE users SET userExp = {startExp + nextLvlExp} WHERE userID = '{id}'")
 	db.commit()
 
+def updateAlias(id, alias):
+	cursor.execute(f"UPDATE users SET useralias = '{alias}' WHERE userID = '{id}'")
+	db.commit()
 
-	
+def removeAlias(id):
+	cursor.execute(f"UPDATE users SET useralias = NULL WHERE userID = '{id}'")
+	db.commit()
+
 
 def setup(client):
 	client.add_cog(UserLvl(client))

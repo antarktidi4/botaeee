@@ -1,5 +1,7 @@
-from discord.ext import commands
 from random import randint, choice
+from discord.ext import commands
+from cogs.dbCog import UI, updateAlias
+from cogs.uacAdmSide import uacAdmSide
 import discord
 
 
@@ -15,7 +17,7 @@ class textCommands(commands.Cog):
 	@commands.command()
 	async def help(self, ctx):
 		embed=discord.Embed(title="Help command")
-		embed.add_field(name="text command", value="gaytest - *тест на гея*\ndickometr - *размер твоего гиганта*\noppr @nick - *унижение чела*\nct {text} - *клоунский текст*\nup @nick(опц.) - *погоняло*", inline=True)
+		embed.add_field(name="text command", value="card @nick(опц.) - *карточка юзера*\ngaytest - *тест на гея*\ndickometr - *размер твоего гиганта*\noppr @nick - *унижение чела*\nct {text} - *клоунский текст*\nua @nick(опц.) - *погоняло*", inline=True)
 		embed.add_field(name="parse command", value="anec - *анекдот*\nmeme - *рандомный мем*\nrhentai - *рандом пик хентая*\ndhentai {tag} - *пик хентая по тегу*", inline=True)
 		embed.add_field(name="games", value="ttt @nick - *крестики нолики*\nrHelp - *помощь по русской рулетке*", inline=True)
 		await ctx.send(embed=embed)
@@ -73,11 +75,38 @@ class textCommands(commands.Cog):
 			pass
 		await ctx.send(text)
 
-	@commands.command(name = 'up')
-	async def up(self, ctx, member: discord.Member = None):
-		user = ctx.message.author.mention if member is None else member.mention
+	@commands.command(name = 'ua')
+	async def ua(self, ctx, member: discord.Member = None):
 		p = ['попущенец', 'педофилыч', 'хуйс', 'король', 'пиздоблядка', 'хохол', 'вор', 'чиркаш', 'депутат', 'шнырь', 'водолаз', 'колпак', 'пидорас', 'вахчун', 'шпак', 'Гудабзай', 'симп', 'инцел']
-		await ctx.send(f'{user} получает заслуженное звание "{choice(p)}"')
+		if member is None:
+			user = ctx.message.author.mention
+			uInfo = UI(ctx.message.author.id)
+			if uInfo[3] is not None:
+				await ctx.send(f'{user} имеет заслуженное звание "{uInfo[3]}"\n*(для смены напишите $uaChange и после рассмотрения модерации будет доступна смена.)*')
+			else:
+				alias = choice(p)
+				updateAlias(ctx.message.author.id, alias)
+				await ctx.send(f'{user} получает заслуженное звание "{alias}"\n*(для смены напишите $uaChange и после рассмотрения модерации будет доступна смена.)*')
+		elif member is not None and member.bot is False:
+			user = member.mention
+			uInfo = UI(member.id)
+			if uInfo[3] is not None:
+				await ctx.send(f'{user} имеет заслуженное звание "{uInfo[3]}"')
+			else:
+				await ctx.send(f'у {user} отстутствует звание')
+		else:
+			await ctx.send(f'{user} имеет заслуженное звание "None"')
+
+
+	@commands.command(name = 'uaChange')
+	async def uaChange(self, ctx):
+		user = ctx.message.author
+		uInfo = UI(user.id)
+		if uInfo[3] is not None:
+			await uacAdmSide.requestMessage(self, user)
+			await ctx.send(f'{user.mention} заявка на смену отправлена, ожидайте ответа модерации.')
+		else:
+			await ctx.send(f'{user.mention} для смены нужно иметь погоняло. Пропишите $ua')
 
 
 
