@@ -88,17 +88,17 @@ def addExp(startExp, nextLvlExp, id):
 	db.commit()
 
 def updateAlias(id, alias):
-	updateData(id)
+	await updateData(id)
 	cursor.execute(f"UPDATE users SET useralias = '{alias}' WHERE userID = '{id}'")
 	db.commit()
 
 def removeAlias(id):
-	updateData(id)
+	await updateData(id)
 	cursor.execute(f"UPDATE users SET useralias = NULL WHERE userID = '{id}'")
 	db.commit()
 
 def removeLvl(id, lvl):
-	updateData(id)
+	await updateData(id)
 	cursor.execute(f"UPDATE users SET userlvl = {lvl} WHERE userID = '{id}'")
 	db.commit()
 
