@@ -1,10 +1,10 @@
 from discord.ext import commands
 import discord, psycopg2, os
 
-dbname = 'd9ehvkm8fc5u3e'
-user = 'qjlbkzwsprhfjf'
-password = '947b16268fb6b5bb95dc52be131a328f47ca95908364f0cef8e8a7b4273296f9'
-host = 'ec2-52-21-0-111.compute-1.amazonaws.com'
+dbname = os.environ.get('dbname')
+user = os.environ.get('user')
+password = os.environ.get('password')
+host = os.environ.get('host')
 
 
 
