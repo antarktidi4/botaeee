@@ -3,7 +3,9 @@ from pymongo import MongoClient
 from cogs.dbCog import addExp, removeLvl, UI, permissionCheck
 import discord
 
-db = MongoClient('mongodb+srv://bot:D34th_god@cluster.zxayg.mongodb.net/Aeee?retryWrites=true&w=majority').Aeee.game
+
+mclient = os.environ.get('mclient')
+db = MongoClient(mclient).Aeee.game
 
 
 class betCog(commands.Cog):
