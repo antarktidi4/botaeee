@@ -1,7 +1,7 @@
 from discord.ext import commands
 from pymongo import MongoClient
 from cogs.dbCog import addExp, removeLvl, UI, permissionCheck
-import discord
+import discord, os
 
 
 mclient = os.environ.get('mclient')
