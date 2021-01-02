@@ -2,4 +2,5 @@ discord.py
 requests
 psycopg2
 pybooru
+pymongo
 bs4
