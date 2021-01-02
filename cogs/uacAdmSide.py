@@ -25,8 +25,8 @@ class uacAdmSide(commands.Cog):
 	async def requestMessage(self, member):
 		guild = self.client.get_guild(member.guild.id)
 		user = await guild.fetch_member(member.id)
-		alias = await UI(user.id)[3]
-
+		alias = await UI(user.id)
+		alias = alias[3]
 		messBody = f'''
 		**userID**: {user.id}
 		**userName**: {user.name}#{user.discriminator}
