@@ -6,8 +6,6 @@ user = os.environ.get('user')
 password = os.environ.get('password')
 host = os.environ.get('host')
 
-
-
 db = psycopg2.connect(dbname=dbname, user=user, password=password, host=host)
 cursor = db.cursor()
 
@@ -74,35 +72,40 @@ async def updateLvl(user, channel):
 		cursor.execute(f"UPDATE users SET userLvl = {lvlEnd} WHERE userID = '{user.id}'")
 		db.commit()
 
-		
-		
-def UI(id):
-	updateData(id)
+
+
+async def UI(id):
+	await updateData(id)
 	cursor.execute(f"SELECT * FROM users WHERE userID = '{id}'")
 	for userInfo in cursor.fetchall():
 		userInfo = userInfo
 	return userInfo
 
-def addExp(startExp, nextLvlExp, id):
+async def addExp(startExp, nextLvlExp, id):
 	cursor.execute(f"UPDATE users SET userExp = {startExp + nextLvlExp} WHERE userID = '{id}'")
 	db.commit()
 
-def updateAlias(id, alias):
-	updateData(id)
-	cursor.execute(f"UPDATE users SET useralias = '{alias}' WHERE userID = '{id}'")
+async def updateAlias(id, alias):
+	await updateData(id)
+	if alias is not None:
+		cursor.execute(f"UPDATE users SET useralias = '{alias}' WHERE userID = '{id}'")
+	else:
+		cursor.execute(f"UPDATE users SET useralias = NULL WHERE userID = '{id}'")
 	db.commit()
 
-def removeAlias(id):
-	updateData(id)
-	cursor.execute(f"UPDATE users SET useralias = NULL WHERE userID = '{id}'")
-	db.commit()
-
-def removeLvl(id, lvl):
-	updateData(id)
+async def removeLvl(id, lvl):
+	await updateData(id)
 	cursor.execute(f"UPDATE users SET userlvl = {lvl} WHERE userID = '{id}'")
 	db.commit()
 
-
+async def permissionCheck(ctx, member):
+	Vrole = discord.utils.get(member.guild.roles, name = "Власть")
+	Prole = discord.utils.get(member.guild.roles, name = "парламентъ")
+	if Vrole in ctx.message.author.roles or Prole in ctx.message.author.roles:
+		return None
+	else:
+		embed = discord.Embed(title = "Permission Denied.", description = "You don't have permission to use this command.", color=0xff00f6)
+		return embed
 
 
 def setup(client):

@@ -32,8 +32,8 @@ class rr(commands.Cog):
 		data = json.loads(str(mess.content))
 		if data['user'] == ctx.message.author.mention:
 			exp = 200*(6-data['bullets'])
-			uID, uExp, Ulvl, uAlias = UI(ctx.message.author.id)
-			addExp(uExp, exp, uID)
+			uID, uExp, Ulvl, uAlias = await UI(ctx.message.author.id)
+			await addExp(uExp, exp, uID)
 			data['bullets'] = 0
 			data['user'] = 'sosat'
 			d = json.dumps(data)
@@ -58,27 +58,27 @@ class rr(commands.Cog):
 
 			elif data['user'] == ctx.message.author.mention:
 				state = randint(1, data['bullets'])
-				uID, uExp, Ulvl, uAlias = UI(ctx.message.author.id)
+				uID, uExp, Ulvl, uAlias = await UI(ctx.message.author.id)
 
 				if state == 1:
 					exp = 100+200*(6-data['bullets'])
-					addExp(uExp, -exp, uID)
+					await addExp(uExp, -exp, uID)
 					lvl = int(uExp ** (1/4))
 					data['bullets'] = 0
 					data['user'] = 'sosat'
 					await ctx.send(f'{ctx.message.author.mention} Сделал выстрел и умер.\n  Потеряно exp: {exp}')
 					if Ulvl < lvl:
-						removeLvl(uID, lvl)
+						await removeLvl(uID, lvl)
 						await ctx.send(f'{ctx.message.author.mention} reduced level to {lvl}')
 
 				elif data['bullets'] > 1:
 					data['bullets'] -= 1
-					addExp(uExp, 200, uID)
+					await addExp(uExp, 200, uID)
 					await ctx.send(f'{ctx.message.author.mention} Сделал выстрел и выжил.\n  Добавлено 200 exp(осталось выстрелов {data["bullets"]-1})')
 
 				elif data['bullets'] == 1:
 					data['bullets'] = 0
-					addExp(uExp, 200, uID)
+					await addExp(uExp, 200, uID)
 					await ctx.send(f'{ctx.message.author.mention} Сделал последний выстрел и выиграл 1к экспы, поздравьте счастливчика!')
 
 				d = json.dumps(data)

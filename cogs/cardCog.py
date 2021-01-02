@@ -28,9 +28,9 @@ class card(commands.Cog):
 		else:
 			userPolit = 'правый'
 
-		userInfo = UI(user.id)
+		userInfo = await UI(user.id)
+		
 		alias = userInfo[3]
-
 		exp = userInfo[1]
 		userLvl = userInfo[2]
 
@@ -45,10 +45,10 @@ class card(commands.Cog):
 	async def addlvl(self, ctx):
 		role = discord.utils.get(ctx.author.guild.roles, name="Власть")
 		if role in ctx.message.author.roles:
-			userInfo = UI(ctx.message.author.id)
+			userInfo = await UI(ctx.message.author.id)
 			lvlExpReq = (int(userInfo[1]**(1/4)) + 1)**4
 			nextLvlExp = (lvlExpReq - userInfo[1]) + 4
-			addExp(userInfo[1], nextLvlExp, ctx.message.author.id)
+			await addExp(userInfo[1], nextLvlExp, ctx.message.author.id)
 
 
 		

@@ -36,6 +36,13 @@ class parseCommands(commands.Cog):
 		embed.set_footer(text = s[0]['tag_string'])
 		await ctx.send(embed = embed)
 
+	@commands.command(name = 'avatar')
+	async def avatar(self, ctx, member: discord.Member = None):
+		user = ctx.author if member is None else member
+		embed = discord.Embed(title = user.name, color=0xff00f6)
+		embed.set_image(url = user.avatar_url)
+		await ctx.send(embed = embed)
+
 
 def setup(client):
 	client.add_cog(parseCommands(client))

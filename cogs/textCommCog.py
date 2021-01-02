@@ -1,7 +1,5 @@
-from random import randint, choice
+from random import randint
 from discord.ext import commands
-from cogs.dbCog import UI, updateAlias
-from cogs.uacAdmSide import uacAdmSide
 import discord
 
 
@@ -18,7 +16,7 @@ class textCommands(commands.Cog):
 	async def help(self, ctx):
 		embed=discord.Embed(title="Help command")
 		embed.add_field(name="text command", value="card @nick(опц.) - *карточка юзера*\ngaytest - *тест на гея*\ndickometr - *размер твоего гиганта*\noppr @nick - *унижение чела*\nct {text} - *клоунский текст*\nua @nick(опц.) - *погоняло*", inline=True)
-		embed.add_field(name="parse command", value="anec - *анекдот*\nmeme - *рандомный мем*\nrhentai - *рандом пик хентая*\ndhentai {tag} - *пик хентая по тегу*", inline=True)
+		embed.add_field(name="parse command", value="anec - *анекдот*\nmeme - *рандомный мем*\nrhentai - *рандом пик хентая*\ndhentai {tag} - *пик хентая по тегу*\navatar @nick(опц.) - аватарка юзера", inline=True)
 		embed.add_field(name="games", value="ttt @nick - *крестики нолики*\nrHelp - *помощь по русской рулетке*", inline=True)
 		await ctx.send(embed=embed)
 
@@ -30,7 +28,8 @@ class textCommands(commands.Cog):
 		embed.add_field(name="**важно!**", value="в любой момент можно прописать $rEx и выйти из рулетки", inline=False)
 		embed.set_footer(text="Удачи!")
 		await ctx.send(embed=embed)
-		
+
+
 	@commands.command(name = 'ct')
 	async def ct(self, ctx):
 		x = 0
@@ -38,15 +37,7 @@ class textCommands(commands.Cog):
 		text = ctx.message.content[4:]
 		for Chr in text:
 			x += 1
-			if x % 2 == 0:
-				final += Chr.upper()
-			else:
-				final += Chr.lower()
-		try:
-			msg = await ctx.message.channel.fetch_message(ctx.message.id)
-			await msg.delete()
-		except:
-			pass
+			final += Chr.upper() if x % 2 == 0 else Chr.lower()
 		await ctx.send(final)
 
 
@@ -66,48 +57,8 @@ class textCommands(commands.Cog):
 
 	@commands.command(name = 'oppr')
 	async def oppression(self, ctx, member: discord.Member):
-		msg = await ctx.message.channel.fetch_message(ctx.message.id)
-		chance = randint(1, 4)
-		text = f'{ctx.message.author.mention} унизил {member.mention}' if chance != 4 else f'{ctx.message.author.mention} попытался унизить {member.mention}, но обосрался и ушёл с позором'
-		try:
-			await msg.delete()
-		except:
-			pass
+		text = f'{ctx.message.author.mention} унизил {member.mention}' if randint(1, 4) != 4 else f'{ctx.message.author.mention} попытался унизить {member.mention}, но обосрался и ушёл с позором'
 		await ctx.send(text)
-
-	@commands.command(name = 'ua')
-	async def ua(self, ctx, member: discord.Member = None):
-		p = ['попущенец', 'педофилыч', 'хуйс', 'король', 'пиздоблядка', 'хохол', 'вор', 'чиркаш', 'депутат', 'шнырь', 'водолаз', 'колпак', 'пидорас', 'вахчун', 'шпак', 'Гудабзай', 'симп', 'инцел']
-		if member is None:
-			user = ctx.message.author.mention
-			uInfo = UI(ctx.message.author.id)
-			if uInfo[3] is not None:
-				await ctx.send(f'{user} имеет заслуженное звание "{uInfo[3]}"\n*(для смены напишите $uaChange и после рассмотрения модерации будет доступна смена.)*')
-			else:
-				alias = choice(p)
-				updateAlias(ctx.message.author.id, alias)
-				await ctx.send(f'{user} получает заслуженное звание "{alias}"\n*(для смены напишите $uaChange и после рассмотрения модерации будет доступна смена.)*')
-		elif member is not None and member.bot is False:
-			user = member.mention
-			uInfo = UI(member.id)
-			if uInfo[3] is not None:
-				await ctx.send(f'{user} имеет заслуженное звание "{uInfo[3]}"')
-			else:
-				await ctx.send(f'у {user} отстутствует звание')
-		else:
-			await ctx.send(f'{user} имеет заслуженное звание "None"')
-
-
-	@commands.command(name = 'uaChange')
-	async def uaChange(self, ctx):
-		user = ctx.message.author
-		uInfo = UI(user.id)
-		if uInfo[3] is not None:
-			await uacAdmSide.requestMessage(self, user)
-			await ctx.send(f'{user.mention} заявка на смену отправлена, ожидайте ответа модерации.')
-		else:
-			await ctx.send(f'{user.mention} для смены нужно иметь погоняло. Пропишите $ua')
-
 
 
 def setup(client):
