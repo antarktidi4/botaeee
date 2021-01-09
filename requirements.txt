@@ -4,4 +4,5 @@ requests
 psycopg2
 pybooru
 pymongo
+lxml
 bs4
