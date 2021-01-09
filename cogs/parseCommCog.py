@@ -1,12 +1,20 @@
+from bs4 import BeautifulSoup as BS
 from discord.ext import commands
 import discord, requests, json
 from pybooru import Danbooru
+from random import choice
 
 
 class parseCommands(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
+
+	@commands.Cog.listener()
+	async def on_raw_message_delete(self, ctx):
+		embed=discord.Embed(title='Deleted message:', description=ctx.cached_message.content, color=0xff00f6)
+		embed.set_author(name = ctx.cached_message.author, icon_url=ctx.cached_message.author.avatar_url)
+		await ctx.cached_message.channel.send(embed = embed)
 
 	@commands.command('anec')
 	async def anec(self, ctx):
@@ -42,6 +50,22 @@ class parseCommands(commands.Cog):
 		embed = discord.Embed(title = user.name, color=0xff00f6)
 		embed.set_image(url = user.avatar_url)
 		await ctx.send(embed = embed)
+
+	@commands.command(name = 'token')
+	async def token(self, ctx):
+		token = requests.get('https://some-random-api.ml/bottoken').json()['token']
+		embed = discord.Embed(title = 'bot token!', description=f"{token}", color=0xff00f6)
+		await ctx.send(embed = embed)
+
+	@commands.command(name = 'img')
+	async def img(self, ctx, arg = None):
+		search = arg if arg is not None else 'cursed image'
+		link = f'https://results.dogpile.com/serp?qc=images&q={search}'.replace(' ', '+')
+		r = requests.get(link, headers={'User-agent': 'Chrome', 'Accept': 'text/html'}).text
+		embed = discord.Embed(title = f'img: {search}', color=0xff00f6)
+		embed.set_image(url = choice(BS(r, 'lxml').find_all('img'))['src'])
+		await ctx.send(embed = embed)
+
 
 
 def setup(client):

@@ -16,7 +16,7 @@ class textCommands(commands.Cog):
 	async def help(self, ctx):
 		embed=discord.Embed(title="Help command")
 		embed.add_field(name="text command", value="card @nick(опц.) - *карточка юзера*\ngaytest - *тест на гея*\ndickometr - *размер твоего гиганта*\noppr @nick - *унижение чела*\nct {text} - *клоунский текст*\nua @nick(опц.) - *погоняло*", inline=True)
-		embed.add_field(name="parse command", value="anec - *анекдот*\nmeme - *рандомный мем*\nrhentai - *рандом пик хентая*\ndhentai {tag} - *пик хентая по тегу*\navatar @nick(опц.) - аватарка юзера", inline=True)
+		embed.add_field(name="parse command", value="anec - *анекдот*\nmeme - *рандомный мем*\nrhentai - *рандом пик хентая*\ndhentai {tag} - *пик хентая по тегу*\navatar @nick(опц.) - аватарка юзера\ntoken - *токен бота*\nimg arg(опц.) - *рандом пик по arg*", inline=True)
 		embed.add_field(name="games", value="ttt @nick - *крестики нолики*\nrHelp - *помощь по русской рулетке*", inline=True)
 		await ctx.send(embed=embed)
 
