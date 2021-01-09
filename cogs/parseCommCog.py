@@ -68,10 +68,12 @@ class parseCommands(commands.Cog):
 		link = f'https://results.dogpile.com/serp?qc=images&q={search}'.replace(' ', '+')
 		r = requests.get(link, headers={'User-agent': 'Chrome', 'Accept': 'text/html'}).text
 		embed = discord.Embed(title = f'img: {search}', color=0xff00f6)
-		embed.set_image(url = choice(BS(r, 'lxml').find_all('img'))['src'])
-		await ctx.send(embed = embed)
-
-
+		try:
+			embed.set_image(url = choice(BS(r, 'lxml').find_all('img'))['src'])
+			await ctx.send(embed = embed)
+		except:
+			await ctx.send('попробуй ещё раз')
+		
 
 def setup(client):
 	client.add_cog(parseCommands(client))
