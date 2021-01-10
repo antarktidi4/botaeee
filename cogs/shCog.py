@@ -9,12 +9,15 @@ class shakalCog(commands.Cog):
 
 	@commands.command(name = 'sh')
 	async def shakal(self, ctx, speed = None):
-		l = 500 if speed is None else None
+		l = 100 if speed is None else speed
 		img = []
-		async for x in discord.abc.Messageable.history(ctx.message.channel, limit = l):
-			if x.attachments != [] and x.attachments[0].filename.endswith(('png', 'jpg', 'jpeg')) is True:
-				img.append(x.attachments)
-
+		try:
+			async for x in discord.abc.Messageable.history(ctx.message.channel, limit = l):
+				if x.attachments != [] and x.attachments[0].filename.endswith(('png', 'jpg', 'jpeg')) is True:
+					img.append(x.attachments)
+		except:
+			await ctx.send('error')
+			break
 
 		img = random.choice(img)
 		r = requests.get(img[0].url, stream = True)
