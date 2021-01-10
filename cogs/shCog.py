@@ -40,9 +40,7 @@ class shakalCog(commands.Cog):
 
 
 			file = discord.File(img[0].filename, filename = img[0].filename)
-			embed = discord.Embed(title='шакал', color=0xff00f6)
-			embed.set_image(url = f'attachment://{img[0].filename}')
-			await ctx.send(embed = embed, file = file)
+			await ctx.send(file = file)
 
 			os.remove(img[0].filename)
 		else:
