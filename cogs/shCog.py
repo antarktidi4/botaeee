@@ -18,34 +18,35 @@ class shakalCog(commands.Cog):
 		except:
 			await ctx.send('error')
 			return
-
-		img = random.choice(img)
-		r = requests.get(img[0].url, stream = True)
-
-
-		if r.status_code == 200:
-			r.raw.decode_content = True
-		with open(img[0].filename, 'wb') as f:
-			shutil.copyfileobj(r.raw, f)
+		if img != []:
+			img = random.choice(img)
+			r = requests.get(img[0].url, stream = True)
 
 
-		imgPIL = Image.open(img[0].filename)
-
-		Con = ImageEnhance.Contrast(imgPIL)
-		ConL = Con.enhance(2)
-		Sha = ImageEnhance.Sharpness(ConL)
-		ShaL = Sha.enhance(200)
-
-		ShaL.save(img[0].filename, quality=1)
+			if r.status_code == 200:
+				r.raw.decode_content = True
+			with open(img[0].filename, 'wb') as f:
+				shutil.copyfileobj(r.raw, f)
 
 
-		file = discord.File(img[0].filename, filename = img[0].filename)
-		embed = discord.Embed(title='шакал', color=0xff00f6)
-		embed.set_image(url = f'attachment://{img[0].filename}')
-		await ctx.send(embed = embed, file = file)
+			imgPIL = Image.open(img[0].filename)
 
-		os.remove(img[0].filename)
+			Con = ImageEnhance.Contrast(imgPIL)
+			ConL = Con.enhance(2)
+			Sha = ImageEnhance.Sharpness(ConL)
+			ShaL = Sha.enhance(200)
 
+			ShaL.save(img[0].filename, quality=1)
+
+
+			file = discord.File(img[0].filename, filename = img[0].filename)
+			embed = discord.Embed(title='шакал', color=0xff00f6)
+			embed.set_image(url = f'attachment://{img[0].filename}')
+			await ctx.send(embed = embed, file = file)
+
+			os.remove(img[0].filename)
+		else:
+			await ctx.send('в 100 сообщениях не найдено изображение, пропишите $sh %int%')
 
 
 def setup(client):
