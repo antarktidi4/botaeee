@@ -9,7 +9,7 @@ class shakalCog(commands.Cog):
 
 	@commands.command(name = 'sh')
 	async def shakal(self, ctx, speed = None):
-		l = 1000 if speed is None else None
+		l = 500 if speed is None else None
 		img = []
 		async for x in discord.abc.Messageable.history(ctx.message.channel, limit = l):
 			if x.attachments != [] and x.attachments[0].filename.endswith(('png', 'jpg', 'jpeg')) is True:
