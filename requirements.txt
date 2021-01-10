@@ -5,6 +5,5 @@ psycopg2
 pybooru
 pymongo
 pillow
-shutil
 lxml
 bs4
