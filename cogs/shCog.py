@@ -9,7 +9,7 @@ class shakalCog(commands.Cog):
 
 	@commands.command(name = 'sh')
 	async def shakal(self, ctx, speed = None):
-		l = 100 if speed is None else speed
+		l = 100 if speed is None else int(speed)
 		img = []
 		try:
 			async for x in discord.abc.Messageable.history(ctx.message.channel, limit = l):
