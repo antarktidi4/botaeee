@@ -17,7 +17,7 @@ class shakalCog(commands.Cog):
 					img.append(x.attachments)
 		except:
 			await ctx.send('error')
-			break
+			return
 
 		img = random.choice(img)
 		r = requests.get(img[0].url, stream = True)
