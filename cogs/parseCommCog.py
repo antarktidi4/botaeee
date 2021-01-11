@@ -44,7 +44,7 @@ class parseCommands(commands.Cog):
 	async def dhentai(self, ctx, tags):
 		dClient = Danbooru('danbooru')
 		s = dClient.post_list(limit=1, tags=tags, random = True)
-		embed = discord.Embed(title="Danbooru hentai!", description=f"link: [source]({s[0]['source']})", color=0xff00f6)
+		embed = discord.Embed(title="Danbooru hentai!", color=0xff00f6)
 		embed.set_image(url = s[0]['file_url'])
 		embed.set_footer(text = s[0]['tag_string'])
 		await ctx.send(embed = embed)
