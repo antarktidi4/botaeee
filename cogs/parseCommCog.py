@@ -45,10 +45,14 @@ class parseCommands(commands.Cog):
 		dClient = Danbooru('danbooru')
 		s = dClient.post_list(limit=1, tags=tags, random = True)
 		embed = discord.Embed(title="Danbooru hentai!", color=0xff00f6)
-		embed.set_image(url = s[0]['file_url'])
-		embed.set_footer(text = s[0]['tag_string'])
-		await ctx.send(embed = embed)
-
+		try:
+			embed.set_image(url = s[0]['file_url'])
+			embed.set_footer(text = s[0]['tag_string'])
+			await ctx.send(embed = embed)
+		except:
+			await ctx.send('попробуй ещё раз')	      
+				      
+				      
 	@commands.command(name = 'avatar')
 	async def avatar(self, ctx, member: discord.Member = None):
 		user = ctx.author if member is None else member
