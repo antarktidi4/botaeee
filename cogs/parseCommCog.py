@@ -70,7 +70,7 @@ class parseCommands(commands.Cog):
 	async def img(self, ctx, arg = None):
 		search = arg if arg is not None else 'cursed image'
 		link = f'https://results.dogpile.com/serp?qc=images&q={search}'.replace(' ', '+')
-		r = requests.get(link, headers={'User-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36', 'Accept': 'text/html'}).text
+		r = requests.get(link, headers={'User-agent': 'Mozilla/4.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/82.0.4103.97 Safari/537.36', 'Accept': 'text/html'}).text
 		embed = discord.Embed(title = f'img: {search}', color=0xff00f6)
 		try:
 			embed.set_image(url = choice(BS(r, 'lxml').find_all('img'))['src'])
