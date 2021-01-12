@@ -61,5 +61,15 @@ class textCommands(commands.Cog):
 		await ctx.send(text)
 
 
+
+	@commands.command(name = 'tn')
+	async def tn(self, ctx):
+		text = f'токсичность Николая на сегодня превышает 70%, возможны всплески агрессии, куча негатива; советуем сегодня не злить Коляна'
+		await ctx.send(text)
+
+		await ctx.send(text)		
+		
+		
+
 def setup(client):
 	client.add_cog(textCommands(client))
