@@ -12,12 +12,15 @@ class parseCommands(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_raw_message_delete(self, ctx):
-		try:
-			embed=discord.Embed(title='Deleted message:', description=ctx.cached_message.content, color=0xff00f6)
-			embed.set_author(name = ctx.cached_message.author, icon_url=ctx.cached_message.author.avatar_url)
-			await ctx.cached_message.channel.send(embed = embed)
-		except:
-			await ctx.cached_message.channel.send(f'{ctx.cached_message.author.mention} delete "{ctx.cached_message.content}"')
+		if ctx.author.bot is False:
+			try:
+				embed=discord.Embed(title='Deleted message:', description=ctx.cached_message.content, color=0xff00f6)
+				embed.set_author(name = ctx.cached_message.author, icon_url=ctx.cached_message.author.avatar_url)
+				if ctx.message.attachments != []:
+					embed.set_image(url = ctx.message.attachments.url)
+				await ctx.cached_message.channel.send(embed = embed)
+			except:
+				await ctx.cached_message.channel.send(f'{ctx.cached_message.author.mention} delete "{ctx.cached_message.content}"')
 		
 		
 		
