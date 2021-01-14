@@ -16,8 +16,6 @@ class parseCommands(commands.Cog):
 			try:
 				embed=discord.Embed(title='Deleted message:', description=ctx.cached_message.content, color=0xff00f6)
 				embed.set_author(name = ctx.cached_message.author, icon_url=ctx.cached_message.author.avatar_url)
-				if ctx.cached_message.attachments != []:
-					embed.set_image(url = ctx.cached_message.attachments.url)
 				await ctx.cached_message.channel.send(embed = embed)
 			except:
 				await ctx.cached_message.channel.send(f'{ctx.cached_message.author.mention} delete "{ctx.cached_message.content}"')
