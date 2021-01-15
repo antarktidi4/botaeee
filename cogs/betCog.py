@@ -46,7 +46,7 @@ class betCog(commands.Cog):
 					await addExp(uI[1], round(int(bets[bet][0])*1.5), bet)
 					wValue+= int(bets[bet][0])
 				elif bet != 'default':
-					uID, uExp, Ulvl, uAlias = UI(bet)
+					uID, uExp, Ulvl, uAlias = await UI(bet)
 					await addExp(uExp, round(-int(bets[bet][0])*1.5), bet)
 					lvl = int(uExp ** (1/4))
 					if lvl < Ulvl:
