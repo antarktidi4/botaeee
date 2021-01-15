@@ -34,8 +34,7 @@ async def reload(ctx, extension):
 
 for files in os.listdir('./cogs'):
 	if files.endswith('.py'):
-		try:
-			client.load_extension(f'cogs.{files[:-3]}')
+		client.load_extension(f'cogs.{files[:-3]}')
 
 
 @client.event
