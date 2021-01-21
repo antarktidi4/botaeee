@@ -66,7 +66,13 @@ class textCommands(commands.Cog):
 		text = f'токсичность Николая на сегодня превышает 70%, возможны всплески агрессии, куча негатива; советуем сегодня не злить Коляна'
 		await ctx.send(text)
 
-		
+	@commands.command(name = 'борода')
+	async def br(self, ctx):
+		if ctx.message.author.id == 305715782732480512:
+			text = f'автор сообщения является барадой'
+		else:
+			text = f'автор сообщения не является барадой'
+		await ctx.send(text)		
 
 def setup(client):
 	client.add_cog(textCommands(client))
