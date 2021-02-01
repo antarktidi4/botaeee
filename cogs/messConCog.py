@@ -2,8 +2,6 @@ import discord
 from discord.ext import commands
 
 
-exceptList = [305715782732480512, 263953538424635392]
-
 class messageControlCog(commands.Cog):
 	def __init__(self, client):
 		self.client = client
@@ -11,7 +9,7 @@ class messageControlCog(commands.Cog):
 	@commands.Cog.listener()
 	async def on_raw_message_delete(self, payload: discord.RawReactionActionEvent):
 		global exceptList
-		if payload.cached_message.author.bot is False and payload.cached_message.author.id not in exceptList:
+		if payload.cached_message.author.bot is False:
 
 			cached_message = payload.cached_message.content
 			author = payload.cached_message.author
@@ -32,7 +30,7 @@ class messageControlCog(commands.Cog):
 	@commands.Cog.listener()
 	async def on_raw_message_edit(self, payload: discord.RawReactionActionEvent):
 		global exceptList
-		if payload.cached_message.author.bot is False and payload.cached_message.author.id not in exceptList:
+		if payload.cached_message.author.bot is False:
 
 			cached_message = payload.cached_message.content
 			data = payload.data['content']
