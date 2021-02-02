@@ -22,14 +22,14 @@ class messageControlCog(commands.Cog):
 					embed.set_image(url = cached_message.attachments[0].url)
 
 				await payload.cached_message.channel.send(embed = embed)
-			except:
-				await payload.cached_message.channel.send(f'{author.mention} delete "{cached_message}"')
 			
 			except KeyError:
 				questTime = datetime.date(2021, 1, 28)
 				now = datetime.datetime.today().date()
 				await payload.cached_message.channel.send(f'{author.mention} delete pic (waiting for a answer from support in days: {now-questTime})')
-
+	
+			except:
+				await payload.cached_message.channel.send(f'{author.mention} delete "{cached_message}"')
 
 
 	@commands.Cog.listener()
