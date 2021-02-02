@@ -8,7 +8,6 @@ class messageControlCog(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_raw_message_delete(self, payload: discord.RawReactionActionEvent):
-		global exceptList
 		if payload.cached_message.author.bot is False:
 
 			cached_message = payload.cached_message.content
@@ -22,12 +21,7 @@ class messageControlCog(commands.Cog):
 					embed.set_image(url = cached_message.attachments[0].url)
 
 				await payload.cached_message.channel.send(embed = embed)
-			
-			except KeyError:
-				questTime = datetime.date(2021, 1, 28)
-				now = datetime.datetime.today().date()
-				await payload.cached_message.channel.send(f'{author.mention} delete pic (waiting for a answer from support in days: {now-questTime})')
-	
+
 			except AttributeError:
 				await payload.cached_message.channel.send(f'{author.mention} delete "{cached_message}"')
 
