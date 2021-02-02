@@ -28,7 +28,7 @@ class messageControlCog(commands.Cog):
 				now = datetime.datetime.today().date()
 				await payload.cached_message.channel.send(f'{author.mention} delete pic (waiting for a answer from support in days: {now-questTime})')
 	
-			except:
+			except AttributeError:
 				await payload.cached_message.channel.send(f'{author.mention} delete "{cached_message}"')
 
 
