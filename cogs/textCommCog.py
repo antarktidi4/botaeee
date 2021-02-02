@@ -70,7 +70,7 @@ class textCommands(commands.Cog):
 	async def sup(self, ctx):
 		questTime = datetime.date(2021, 1, 28)
 		now = datetime.datetime.today().date()
-		await payload.cached_message.channel.send(f'waiting for a answer from support in days: {now-questTime}')
+		await ctx.send(f'waiting for a answer from support in days: {now-questTime}')
 	
 	@commands.command(name = 'борода')
 	async def br(self, ctx):
