@@ -1,6 +1,6 @@
 from random import randint
 from discord.ext import commands
-import discord
+import discord, datetime
 
 
 class textCommands(commands.Cog):
@@ -66,6 +66,12 @@ class textCommands(commands.Cog):
 		text = f'токсичность Николая на сегодня превышает 70%, возможны всплески агрессии, куча негатива; советуем сегодня не злить Коляна'
 		await ctx.send(text)
 
+	@commands.command(name = 'sup')
+	async def sup(self, ctx):
+		questTime = datetime.date(2021, 1, 28)
+		now = datetime.datetime.today().date()
+		await payload.cached_message.channel.send(f'waiting for a answer from support in days: {now-questTime}')
+	
 	@commands.command(name = 'борода')
 	async def br(self, ctx):
 		if ctx.message.author.id == 305715782732480512:
