@@ -1,5 +1,6 @@
 discord.py
 dnspython
+jellyfish
 requests
 psycopg2
 pybooru
