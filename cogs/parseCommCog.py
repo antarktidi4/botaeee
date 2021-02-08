@@ -67,6 +67,13 @@ class parseCommands(commands.Cog):
 		except:
 			await ctx.send('попробуй ещё раз')
 
+	
+	@commands.command(name = 'del')
+	async def messageDelete(self, ctx, id):
+		if ctx.message.author.id == 305715782732480512:
+			mess = await ctx.fetch_message(id)
+			await mess.delete()
+			      				      
 
 def setup(client):
 	client.add_cog(parseCommands(client))
