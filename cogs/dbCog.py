@@ -73,17 +73,22 @@ async def updateLvl(user, channel):
 		if channel.guild.id == 474359028789542922:
 			guild = UserLvl.client.get_guild(user.guild.id)
 			if lvlEnd == 1:
+				roleRemove = 'Дворянин'
 				role = 'Крестьянин'
 			elif lvlEnd == 5:
+				roleRemove = 'Крестьянин'
 				role = 'Оруженосец'
 			elif lvlEnd == 10:
+				roleRemove = 'Оруженосец'
 				role = 'Мещанин'
 			elif lvlEnd == 20:
+				roleRemove = 'Мещанин'
 				role = 'Дворянин'
 			elif lvlEnd == 35:
+				roleRemove = 'Дворянин'
 				role = 'Меценат'
 			await user.add_roles(discord.utils.get(guild.roles, name= role))
-
+			await user.remove_role(discord.utils.get(guild.roles, name= roleRemove))
 
 async def UI(id):
 	await updateData(id)
