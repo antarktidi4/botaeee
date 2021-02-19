@@ -28,7 +28,7 @@ class UserLvl(commands.Cog):
 	@commands.Cog.listener()
 	async def on_message(self, message):
 		try:
-			if message.author.bot is False and message.channel.guild.id == 474359028789542922:
+			if message.author.bot is False and message.channel.guild.id == 778169282655551498:
 				await updateData(message.author)
 
 				cursor.execute(f"SELECT userExp FROM users WHERE userID = '{message.author.id}'")
