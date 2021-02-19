@@ -20,7 +20,7 @@ class UserLvl(commands.Cog):
 			if member.guild.id == 778169282655551498:
 				guild = self.client.get_guild(member.guild.id)
 				await member.add_roles(discord.utils.get(guild.roles, name="Рабочий класс"))
-			await updateData(member)
+				await updateData(member)
 		except AttributeError:
 			pass
 
@@ -28,7 +28,7 @@ class UserLvl(commands.Cog):
 	@commands.Cog.listener()
 	async def on_message(self, message):
 		try:
-			if message.author.bot is False:
+			if message.author.bot is False and message.channel.guild.id == 474359028789542922:
 				await updateData(message.author)
 
 				cursor.execute(f"SELECT userExp FROM users WHERE userID = '{message.author.id}'")
@@ -70,25 +70,6 @@ async def updateLvl(user, channel):
 		await channel.send(f'{user.mention} up lvl {lvlEnd}')
 		cursor.execute(f"UPDATE users SET userLvl = {lvlEnd} WHERE userID = '{user.id}'")
 		db.commit()
-		if channel.guild.id == 474359028789542922:
-			guild = UserLvl.client.get_guild(user.guild.id)
-			if lvlEnd == 1:
-				roleRemove = 'Дворянин'
-				role = 'Крестьянин'
-			elif lvlEnd == 5:
-				roleRemove = 'Крестьянин'
-				role = 'Оруженосец'
-			elif lvlEnd == 10:
-				roleRemove = 'Оруженосец'
-				role = 'Мещанин'
-			elif lvlEnd == 20:
-				roleRemove = 'Мещанин'
-				role = 'Дворянин'
-			elif lvlEnd == 35:
-				roleRemove = 'Дворянин'
-				role = 'Меценат'
-			await user.add_roles(discord.utils.get(guild.roles, name= role))
-			await user.remove_role(discord.utils.get(guild.roles, name= roleRemove))
 
 async def UI(id):
 	await updateData(id)
