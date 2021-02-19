@@ -34,17 +34,8 @@ class messageControlCog(commands.Cog):
 			k = jellyfish.jaro_similarity(cached_message, data)
 			dataL = len(data)
 			cachL = len(cached_message)
-			
 
-			if payload.cached_message.author.id == 794630173743906836:
-				embed=discord.Embed(title='Edit message:', description = text, color=0xff00f6)
-				embed.set_author(name = author, icon_url = author.avatar_url)
-				if payload.cached_message.attachments != []:
-					embed.set_image(url = payload.cached_message.attachments[0].proxy_url)
-				await payload.cached_message.channel.send(embed = embed)
-
-						
-			elif k <= 0.45 or dataL*5 <= cachL:
+			if k <= 0.45 or dataL*5 <= cachL:
 				try:
 					embed=discord.Embed(title='Edit message:', description = text, color=0xff00f6)
 					embed.set_author(name = author, icon_url = author.avatar_url)
