@@ -1,5 +1,6 @@
 from discord.ext import commands
 import discord, psycopg2, os
+from ramdom import randint, choice
 
 dbname = os.environ.get('dbname')
 user = os.environ.get('user')
@@ -27,16 +28,17 @@ class UserLvl(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
+		if 'когда' in message.content.lower():
+			list = ['сейчас', 'вчера', 'завтра', 'через неделю', f'через {randint(2,9)}']
+			await message.channel.send(f'{message.author.mention} {choice(list)}')
 		try:
 			if message.author.bot is False and message.channel.guild.id == 778169282655551498:
 				await updateData(message.author)
-
 				cursor.execute(f"SELECT userExp FROM users WHERE userID = '{message.author.id}'")
 				for userInfo in cursor.fetchall():
 					uExp = userInfo[0]
 				cursor.execute(f"UPDATE users SET userExp = {uExp + 5} WHERE userID = '{message.author.id}'")
 				db.commit()
-
 				await updateLvl(message.author, message.channel)
 		except AttributeError:
 			pass
