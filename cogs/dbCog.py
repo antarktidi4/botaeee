@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord, psycopg2, os
-from ramdom import randint, choice
+from random import randint, choice
 
 dbname = os.environ.get('dbname')
 user = os.environ.get('user')
