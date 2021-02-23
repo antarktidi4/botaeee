@@ -21,7 +21,7 @@ class UserLvl(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_message(self, message):
-		if 'когда' in message.content.lower():
+		if message.content.lower().startswith('когда'):
 			list = ['сейчас', 'вчера', 'завтра', 'через неделю', f'через {randint(5,16)} дней']
 			await message.channel.send(f'{message.author.mention} {choice(list)}')
 		try:
