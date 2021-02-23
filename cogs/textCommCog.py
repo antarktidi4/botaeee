@@ -29,7 +29,6 @@ class textCommands(commands.Cog):
 		embed.set_footer(text="Удачи!")
 		await ctx.send(embed=embed)
 
-
 	@commands.command(name = 'ct')
 	async def ct(self, ctx):
 		x = 0
@@ -39,7 +38,6 @@ class textCommands(commands.Cog):
 			x += 1
 			final += Chr.upper() if x % 2 == 0 else Chr.lower()
 		await ctx.send(final)
-
 
 	@commands.command(name = 'gaytest')
 	async def gaytest(self, ctx):
@@ -60,12 +58,10 @@ class textCommands(commands.Cog):
 		text = f'{ctx.message.author.mention} унизил {member.mention}' if randint(1, 4) != 4 else f'{ctx.message.author.mention} попытался унизить {member.mention}, но обосрался и ушёл с позором'
 		await ctx.send(text)
 
-
 	@commands.command(name = 'tn')
 	async def tn(self, ctx):
 		text = f'токсичность Николая на сегодня превышает 70%, возможны всплески агрессии, куча негатива; советуем сегодня не злить Коляна'
 		await ctx.send(text)
-
 
 	@commands.command(name = 'борода')
 	async def br(self, ctx):
@@ -73,7 +69,8 @@ class textCommands(commands.Cog):
 			text = f'автор сообщения является барадой'
 		else:
 			text = f'автор сообщения не является барадой'
-		await ctx.send(text)		
+		await ctx.send(text)
+
 
 def setup(client):
 	client.add_cog(textCommands(client))

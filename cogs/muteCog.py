@@ -1,5 +1,4 @@
 from discord.ext import commands
-from cogs.dbCog import permissionCheck
 import discord
 
 
@@ -10,7 +9,9 @@ class muteCog(commands.Cog):
 
 	@commands.command()
 	async def mute(self, ctx, member: discord.Member):
-		if await permissionCheck(ctx, member) is None:
+		Vrole = discord.utils.get(member.guild.roles, name = "Власть")
+		Prole = discord.utils.get(member.guild.roles, name = "парламентъ")
+		if Vrole in ctx.message.author.roles or Prole in ctx.message.author.roles:
 			role = discord.utils.get(member.guild.roles, name = "muted")
 			if role not in member.roles:
 				await member.add_roles(discord.utils.get(member.guild.roles, name="muted"))
@@ -21,9 +22,11 @@ class muteCog(commands.Cog):
 
 	@commands.command()
 	async def unmute(self, ctx, member: discord.Member):
-		if await permissionCheck(ctx, member) is None:
+		Vrole = discord.utils.get(member.guild.roles, name = "Власть")
+		Prole = discord.utils.get(member.guild.roles, name = "парламентъ")
+		if Vrole in ctx.message.author.roles or Prole in ctx.message.author.roles:
 			role = discord.utils.get(member.guild.roles, name = "muted")
-			if role in member.roles:
+			if role not in member.roles:
 				await member.remove_roles(discord.utils.get(member.guild.roles, name="muted"))
 				embed = discord.Embed(title="User Unmuted!", description = f"**{member}** was unmuted by **{ctx.message.author}**!", color=0xff00f6)
 			else:
