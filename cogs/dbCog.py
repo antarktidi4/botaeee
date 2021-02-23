@@ -29,7 +29,7 @@ class UserLvl(commands.Cog):
 	@commands.Cog.listener()
 	async def on_message(self, message):
 		if 'когда' in message.content.lower():
-			list = ['сейчас', 'вчера', 'завтра', 'через неделю', f'через {randint(2,9)}']
+			list = ['сейчас', 'вчера', 'завтра', 'через неделю', f'через {randint(2,9)} дней']
 			await message.channel.send(f'{message.author.mention} {choice(list)}')
 		try:
 			if message.author.bot is False and message.channel.guild.id == 778169282655551498:
