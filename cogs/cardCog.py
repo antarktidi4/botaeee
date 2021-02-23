@@ -10,7 +10,7 @@ class card(commands.Cog):
 
 	@commands.command('card')
 	async def card(self, ctx, member: discord.Member = None):
-		if member.bot is True:
+		if member != None and member.bot is True:
 			embed = discord.Embed(title = 'Bot Card!', description=f"exp: ∞ (to next lvl: 0)\nlvl: ∞\npolitical coordinate: правый\nalias: None", color=0xff00f6)
 			embed.set_author(name = self.client.user.name, icon_url = self.client.user.avatar_url)
 			await ctx.send(embed=embed)
