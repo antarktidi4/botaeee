@@ -35,6 +35,21 @@ class UserLvl(commands.Cog):
 		except AttributeError:
 			pass
 
+	@commands.Cog.listener()
+	async def on_message(self, message):
+		if message.author.id == 778169282655551498:
+			embed=discord.Embed(title='Caspar message:', description = message.content, color=0xff00f6)
+			embed.set_author(name = message.author.name, icon_url = message.author.avatar_url)
+			if message.attachments != []:
+				attachName = message.attachments[0].filename.split('.')
+				if message.attachments[0].filename.split('.')[len(attachName)-1] in 'png,jpg,jpeg'.split(','):
+					embed.set_image(url = message.attachments[0].proxy_url)
+				else:
+					embed.add_field(name = 'File: ', value = f'url: {message.attachments[0].url}')
+					embed.add_field(name = 'File: ', value = f'proxy url: {message.attachments[0].proxy_url}')
+			await message.channel.send(embed = embed)
+
+
 
 def setup(client):
 	client.add_cog(UserLvl(client))
