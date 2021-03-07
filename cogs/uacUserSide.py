@@ -15,18 +15,18 @@ class uAliasCog(commands.Cog):
 		p = ['попущенец', 'педофилыч', 'хуйс', 'король', 'пиздоблядка', 'хохол', 'вор', 'чиркаш', 'депутат', 'шнырь', 'водолаз', 'колпак', 'пидорас', 'вахчун', 'шпак', 'Гудабзай', 'симп', 'инцел']
 		if member is None:
 			user = ctx.message.author.mention
-			uInfo = await dataBase.UI(user)[3]
+			uInfo = dataBase.UI(ctx.message.author)[3]
 			if uInfo is not None:
-				await ctx.send(f'{user} имеет заслуженное звание "{uInfo[3]}"\n*(для смены напишите $uaChange и после рассмотрения модерации будет доступна смена.)*')
+				await ctx.send(f'{user} имеет заслуженное звание "{uInfo}"\n*(для смены напишите $uaChange и после рассмотрения модерации будет доступна смена.)*')
 			else:
 				alias = choice(p)
 				dataBase.updateAlias(ctx.message.author.id, alias)
 				await ctx.send(f'{user} получает заслуженное звание "{alias}"\n*(для смены напишите $uaChange и после рассмотрения модерации будет доступна смена.)*')
 		elif member is not None and member.bot is False:
 			user = member.mention
-			uInfo = dataBase.UI(user)[3]
+			uInfo = dataBase.UI(member)[3]
 			if uInfo is not None:
-				await ctx.send(f'{user} имеет заслуженное звание "{uInfo[3]}"')
+				await ctx.send(f'{user} имеет заслуженное звание "{uInfo}"')
 			else:
 				await ctx.send(f'у {user} отстутствует звание')
 		else:

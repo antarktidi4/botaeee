@@ -27,7 +27,7 @@ class uacAdmSide(commands.Cog):
 		user = await guild.fetch_member(member.id)
 		alias = dataBase.UI(member)[3]
 		messBody = f'''
-		**userID**: {user.id}
+		\n**userID**: {user.id}
 		**userName**: {user.name}#{user.discriminator}
 		**userNick**: {user.nick}(on {guild.name})
 		**userAlias**: {alias}
