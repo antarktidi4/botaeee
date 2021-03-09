@@ -15,8 +15,9 @@ class uacAdmSide(commands.Cog):
 			adm = await self.client.fetch_user('305715782732480512')
 			member = await self.client.fetch_user(id)
 			if message.content[:1] == 'y':
-				class User(id):				#еее
-					id = id				#баа
+				class User(object):			#еее
+					def __init__(self, id):		#eeee
+						self.id = id		#баа
 				user = User(id)				#ть
 				dataBase.updateAlias(user, None)	#ну и костыль))
 				await adm.send('дело сделано')
