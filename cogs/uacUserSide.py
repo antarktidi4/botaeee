@@ -37,7 +37,7 @@ class uAliasCog(commands.Cog):
 		user = ctx.message.author
 		uInfo = dataBase.UI(user)[3]
 		if uInfo is not None:
-			uacAdmSide.requestMessage(self, user)
+			await uacAdmSide.requestMessage(self, user)
 			await ctx.send(f'{user.mention} заявка на смену отправлена, ожидайте ответа модерации.')
 		else:
 			await ctx.send(f'{user.mention} для смены нужно иметь погоняло. Пропишите $ua')
