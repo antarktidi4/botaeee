@@ -43,7 +43,6 @@ def removeLvl(id, lvl):
 	db.commit()
 
 def updateAlias(id, alias):
-	updateData(id)
 	if alias is not None:
 		cursor.execute(f"UPDATE users SET useralias = '{alias}' WHERE userID = '{id}'")
 	else:
