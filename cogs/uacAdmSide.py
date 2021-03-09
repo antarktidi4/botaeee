@@ -15,7 +15,10 @@ class uacAdmSide(commands.Cog):
 			adm = await self.client.fetch_user('305715782732480512')
 			member = await self.client.fetch_user(id)
 			if message.content[:1] == 'y':
-				dataBase.updateAlias(id, None)
+				class User(id):				#еее
+					id = id				#баа
+				user = User(id)				#ть
+				dataBase.updateAlias(user, None)	#ну и костыль))
 				await adm.send('дело сделано')
 				await member.send('администрация одобрило смену погоняла')
 			elif message.content[:1] == 'n':
