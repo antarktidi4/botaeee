@@ -6,23 +6,15 @@ class messageControlCog(commands.Cog):
 	def __init__(self, client):
 		self.client = client
 
-
-	@commands.Cog.listener()
-	async def on_message(self, message):
-		if message.author.id == 794630173743906836:
-			embed = await self.createEmbed(message, 'Send')
-			embed.set_footer(text = 'пасасывай~')
-			await message.channel.send(embed = embed)
-
 	@commands.Cog.listener()
 	async def on_raw_message_delete(self, payload: discord.RawReactionActionEvent):
-		if payload.cached_message.author.bot is False and payload.cached_message.author.id != 794630173743906836:
+		if payload.cached_message.author.bot is False:
 			embed = await self.createEmbed(payload.cached_message, 'Delete')
 			await payload.cached_message.channel.send(embed = embed)
 
 	@commands.Cog.listener()
 	async def on_raw_message_edit(self, payload: discord.RawReactionActionEvent):
-		if payload.cached_message.author.bot is False and payload.cached_message.author.id != 794630173743906836:
+		if payload.cached_message.author.bot is False:
 			cached_message = payload.cached_message.content
 			data = payload.data['content']
 			text = "edit '{0}' to '{1}'".format(cached_message, data)
