@@ -48,7 +48,7 @@ class parseCommands(commands.Cog):
 		embed.set_image(url = user.avatar_url)
 		await ctx.send(embed = embed)
 
-	@commands.command(pass_context = True, aliases = [ 'et', 'eTranslator'])
+	@commands.command(pass_context = True, aliases = ['eblanTranslator', 'et', 'eTranslator'])
 	async def eblanTranslator(self, ctx):
 		eng = list("qwertyuiop[]asdfghjkl;'zxcvbnm,.")
 		ru = list("йцукенгшщзхъфывапролджэячсмитьбю")
