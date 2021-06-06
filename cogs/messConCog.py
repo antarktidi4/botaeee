@@ -42,6 +42,7 @@ class messageControlCog(commands.Cog):
 		if ctx.message.author.id == 305715782732480512:
 			mess = await ctx.fetch_message(id)
 			await mess.delete()
+			await ctx.message.delete()
 
 
 def setup(client):
